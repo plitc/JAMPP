@@ -97,9 +97,9 @@ fi
 #
 ### ### ### ### ### ### ### ### ###
 
-echo "PKG Update"
+echo "---> PKG Update"
 (pkg update) & spinner $!
-echo "PKG Upgrade"
+echo "---> PKG Upgrade"
 (pkg upgrade -y) & spinner $!
 
 ### ### ### ### ### ### ### ### ###
