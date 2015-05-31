@@ -20,6 +20,13 @@ Dependencies
 * FreeBSD
    * Jail (Support)
 ```
+   #/ Kernel Modules
+   echo 'accf_data_load="YES" # Wait for data accept filter' >> /boot/loader.conf
+   echo 'accf_http_load="YES" # Wait for full HTTP request accept filter' >> /boot/loader.conf
+   kldload accf_data
+   kldload accf_http
+
+   #/ GIT Repository
    pkg update
    pkg install -y git
    git clone https://github.com/plitc/JAMPP.git
