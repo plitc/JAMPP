@@ -143,6 +143,7 @@ CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.c
 if [ "$CHECKPHP" = "0" ]; then
     echo "" >> /usr/local/etc/apache24/httpd.conf
     echo '### JAMPP // ###' >> /usr/local/etc/apache24/httpd.conf
+    echo "" >> /usr/local/etc/apache24/httpd.conf
     echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
     echo "" >> /usr/local/etc/apache24/httpd.conf
 cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
