@@ -148,6 +148,13 @@ cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
    AddType application/x-httpd-php .php
    AddType application/x-httpd-php-source .phps
 </IfModule>
+
+<FilesMatch "\.php$">
+   SetHandler application/x-httpd-php
+</FilesMatch>
+<FilesMatch "\.phps$">
+   SetHandler application/x-httpd-php-source
+</FilesMatch>
 PHP
 fi
 
