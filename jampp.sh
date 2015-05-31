@@ -133,6 +133,26 @@ if [ "$CHECKPKGPHPGD" = "0" ]; then
    (pkg install -y php56-gd) & spinner $!
 fi
 
+#/ PHP Modules
+CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.conf)
+if [ "$CHECKPHP" = "0" ]; then
+    echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
+cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
+<IfModule php5_module>
+   DirectoryIndex index.php index.php5 index.html
+   AddType application/x-httpd-php .php
+   AddType application/x-httpd-php-source .phps
+</IfModule>
+PHP
+fi
+
+#/ Apache CHECK
+apachectl configtest
+if [ "$?" != "0" ]; then
+   echo "[ERROR] unknown config error"
+   exit 1
+fi
+
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
 ### ### ### ### ### ### ### ### ###
