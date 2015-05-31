@@ -193,6 +193,15 @@ if [ "$CHECKPKGPHPMYSQL" = "0" ]; then
    (pkg install -y php56-mysql) & spinner $!
 fi
 
+CHECKMYSQL=$(grep -c "mysql_enable" /etc/rc.conf)
+if [ "$CHECKMYSQL" = "0" ]; then
+   echo 'mysql_enable="YES"' >> /etc/rc.conf
+   cp -f /usr/local/share/mysql/my-small.cnf /etc/my.cnf
+   service mysql start
+   rehash
+   mysqladmin -uroot password 'jampp'
+fi
+
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
 ### ### ### ### ### ### ### ### ###
