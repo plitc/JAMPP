@@ -98,14 +98,15 @@ fi
 ### ### ### ### ### ### ### ### ###
 
 #/ PKG
-echo "---> PKG Update"
+echo "---> PKG: update"
    (pkg update) & spinner $!
-echo "---> PKG Upgrade"
+echo "---> PKG: upgrade"
    (pkg upgrade -y) & spinner $!
 
 #/ Apache
 CHECKPKGAPACHE=$(pkg info | grep -c "apache24")
 if [ "$CHECKPKGAPACHE" = "0" ]; then
+   echo "---> PKG: add apache24"
    (pkg install -y apache24) & spinner $!
 fi
 CHECKAPACHE=$(grep -c "apache24_enable" /etc/rc.conf)
@@ -116,11 +117,20 @@ fi
 #/ PHP
 CHECKPKGPHP=$(pkg info | grep -c "php56")
 if [ "$CHECKPKGPHP" = "0" ]; then
+   echo "---> PKG: add php56"
    (pkg install -y php56) & spinner $!
 fi
 CHECKPKGPHPEXTENSIONS=$(pkg info | grep -c "php56-extensions")
 if [ "$CHECKPKGPHPEXTENSIONS" = "0" ]; then
+   echo "---> PKG: add php56-extensions"
    (pkg install -y php56-extensions) & spinner $!
+fi
+
+#/ PHP-GD
+CHECKPKGPHPGD=$(pkg info | grep -c "php56-gd")
+if [ "$CHECKPKGPHPGD" = "0" ]; then
+   echo "---> PKG: add php56-gd"
+   (pkg install -y php56-gd) & spinner $!
 fi
 
 ### ### ### ### ### ### ### ### ###
