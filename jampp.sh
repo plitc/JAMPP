@@ -97,10 +97,31 @@ fi
 #
 ### ### ### ### ### ### ### ### ###
 
+#/ PKG
 echo "---> PKG Update"
-(pkg update) & spinner $!
+   (pkg update) & spinner $!
 echo "---> PKG Upgrade"
-(pkg upgrade -y) & spinner $!
+   (pkg upgrade -y) & spinner $!
+
+#/ Apache
+CHECKPKGAPACHE=$(pkg info | grep -c "apache24")
+if [ "$CHECKPKGAPACHE" = "0" ]; then
+   (pkg install -y apache24) & spinner $!
+fi
+CHECKAPACHE=$(grep -c "apache24_enable" /etc/rc.conf)
+if [ "$CHECKAPACHE" = "0" ]; then
+   echo 'apache24_enable="YES"' >> /etc/rc.conf
+fi
+
+#/ PHP
+CHECKPKGPHP=$(pkg info | grep -c "php56")
+if [ "$CHECKPKGPHP" = "0" ]; then
+   (pkg install -y php56) & spinner $!
+fi
+CHECKPKGPHPEXTENSIONS=$(pkg info | grep -c "php56-extensions")
+if [ "$CHECKPKGPHPEXTENSIONS" = "0" ]; then
+   (pkg install -y php56-extensions) & spinner $!
+fi
 
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
