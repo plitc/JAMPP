@@ -179,6 +179,20 @@ if [ "$STARTAPACHE" = "1" ]; then
    service apache24 start
 fi
 
+#/ MySQL Server
+CHECKPKGMYSQL=$(pkg info | grep -c "mysql56-server")
+if [ "$CHECKPKGMYSQL" = "0" ]; then
+   echo "---> PKG: add mysql56-server"
+   (pkg install -y mysql56-server) & spinner $!
+fi
+
+#/ PHP MySQL Server
+CHECKPKGPHPMYSQL=$(pkg info | grep -c "php56-mysql")
+if [ "$CHECKPKGPHPMYSQL" = "0" ]; then
+   echo "---> PKG: add php56-mysql"
+   (pkg install -y php56-mysql) & spinner $!
+fi
+
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
 ### ### ### ### ### ### ### ### ###
