@@ -154,6 +154,7 @@ fi
 #/ Apache CHECK
 apachectl configtest
 if [ "$?" != "0" ]; then
+   echo "" # dummy
    echo "[ERROR] unknown config error"
    exit 1
 fi
