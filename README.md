@@ -19,6 +19,13 @@ Dependencies
 ============
 * FreeBSD
    * Jail (Support)
+```
+   pkg update
+   pkg install -y git
+   git clone https://github.com/plitc/JAMPP.git
+   cd JAMPP
+   ./jampp.sh install
+```
 
 * free hard disk space requirement: 2-3 GB
 
