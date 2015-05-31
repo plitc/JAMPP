@@ -32,6 +32,7 @@
 
 ### stage0 // ###
 OSVERSION=$(uname)
+JAILED=$(sysctl -a | grep -c "security.jail.jailed: 1")
 MYNAME=$(whoami)
 #
 PRG="$0"
@@ -84,11 +85,22 @@ else
    echo "[ERROR] You must be root to run this script"
    exit 1
 fi
+if [ "$JAILED" = "1" ]; then
+   : # dummy
+else
+   : # dummy
+   : # dummy
+   echo "[ERROR] Run this script inside an FreeBSD JAIL"
+   exit 1
+fi
 ### stage4 // ###
 #
 ### ### ### ### ### ### ### ### ###
 
-
+echo "PKG Update"
+(pkg update) & spinner $!
+echo "PKG Upgrade"
+(pkg upgrade -y) & spinner $!
 
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
@@ -129,6 +141,14 @@ else
    : # dummy
    : # dummy
    echo "[ERROR] You must be root to run this script"
+   exit 1
+fi
+if [ "$JAILED" = "1" ]; then
+   : # dummy
+else
+   : # dummy
+   : # dummy
+   echo "[ERROR] Run this script inside an FreeBSD JAIL"
    exit 1
 fi
 ### stage4 // ###
@@ -178,6 +198,14 @@ else
    echo "[ERROR] You must be root to run this script"
    exit 1
 fi
+if [ "$JAILED" = "1" ]; then
+   : # dummy
+else
+   : # dummy
+   : # dummy
+   echo "[ERROR] Run this script inside an FreeBSD JAIL"
+   exit 1
+fi
 ### stage4 // ###
 #
 ### ### ### ### ### ### ### ### ###
@@ -223,6 +251,14 @@ else
    : # dummy
    : # dummy
    echo "[ERROR] You must be root to run this script"
+   exit 1
+fi
+if [ "$JAILED" = "1" ]; then
+   : # dummy
+else
+   : # dummy
+   : # dummy
+   echo "[ERROR] Run this script inside an FreeBSD JAIL"
    exit 1
 fi
 ### stage4 // ###
