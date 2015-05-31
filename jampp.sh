@@ -175,7 +175,7 @@ fi
 
 #/ start Apache
 STARTAPACHE=$(service apache24 status | grep -c "not running")
-if [ "$STARTAPACHE" = "0" ]; then
+if [ "$STARTAPACHE" = "1" ]; then
    service apache24 start
 fi
 
