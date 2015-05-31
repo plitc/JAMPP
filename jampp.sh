@@ -165,11 +165,18 @@ PHP
 fi
 
 #/ Apache CHECK
-apachectl configtest
+#// apachectl configtest
+service apache24 configtest
 if [ "$?" != "0" ]; then
    echo "" # dummy
    echo "[ERROR] unknown config error"
    exit 1
+fi
+
+#/ start Apache
+STARTAPACHE=$(service apache24 status | grep -c "not running")
+if [ "$STARTAPACHE" = "0" ]; then
+   service apache24 start
 fi
 
 ### ### ### ### ### ### ### ### ###
