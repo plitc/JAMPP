@@ -134,6 +134,11 @@ if [ "$CHECKPKGPHPGD" = "0" ]; then
 fi
 
 #/ PHP Modules
+CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
+if [ "$CHECKPKGMODPHP" = "0" ]; then
+    echo "---> PKG: add mod_php56"
+    (pkg install -y mod_php56) & spinner $!
+fi
 CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.conf)
 if [ "$CHECKPHP" = "0" ]; then
     echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
