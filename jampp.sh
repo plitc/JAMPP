@@ -155,6 +155,13 @@ if [ "$CHECKPKGPHPREADLINE" = "0" ]; then
    (pkg install -y devel/php56-readline) & spinner $!
 fi
 
+#/ PECL extension to support Internationalization(ICU)
+CHECKPKGPECLINTL=$(pkg info | grep -c "pecl-intl")
+if [ "$CHECKPKGPECLINTL" = "0" ]; then
+   echo "---> PKG: add devel/pecl-intl"
+   (pkg install -y devel/pecl-intl) & spinner $!
+fi
+
 #/ PHP Modules
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
