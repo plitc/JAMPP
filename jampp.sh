@@ -134,6 +134,13 @@ if [ "$CHECKPKGPHPGD" = "0" ]; then
    (pkg install -y php56-gd) & spinner $!
 fi
 
+#/ PHP-MYSQLI
+CHECKPKGPHPMYSQLI=$(pkg info | grep -c "php56-mysqli")
+if [ "$CHECKPKGPHPGD" = "0" ]; then
+   echo "---> PKG: add php56-mysqli"
+   (pkg install -y php56-mysqli) & spinner $!
+fi
+
 #/ PHP Modules
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
@@ -207,6 +214,7 @@ if [ "$CHECKMYSQL" = "0" ]; then
    cp -f /usr/local/share/mysql/my-default.cnf /etc/my.cnf
    service mysql-server start
    #/ rehash
+   /bin/csh -c "rehash"
    hash
    mysqladmin -uroot password 'jampp'
    sync

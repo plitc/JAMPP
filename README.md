@@ -45,6 +45,7 @@ JAIL (Package) Dependencies
 * mod_php56
 * mysql56-server
 * php56-mysql
+* php56-mysqli
 
 ```
 ```
