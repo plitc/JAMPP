@@ -162,6 +162,8 @@ if [ "$CHECKPKGMODPHP" = "0" ]; then
 #/   echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
    echo "" >> /usr/local/etc/apache24/httpd.conf
 cat <<"PHP1">> /usr/local/etc/apache24/httpd.conf
+#
+
 # <IfModule php5_module>
 #    DirectoryIndex index.php index.php5 index.html
 #    AddType application/x-httpd-php .php
@@ -197,6 +199,7 @@ cat <<"PHP1">> /usr/local/etc/apache24/httpd.conf
 #    AddType application/x-httpd-php-source .phps  
 # </IfModule>
 
+#
 ### // JAMPP ###
 PHP1
    cp -f /usr/local/etc/php.ini-production /usr/local/etc/php.ini
@@ -321,6 +324,15 @@ CHECKPKGMODPERL2=$(pkg info | grep -c "mod_perl2")
 if [ "$CHECKPKGMODPERL2" = "0" ]; then
    echo "---> PKG: add www/mod_perl2"
    (pkg install -y www/mod_perl2) & spinner $!
+cat <<"PHP4">> /usr/local/etc/apache24/httpd.conf
+### JAMPP // ###
+#
+#/ MOD Perl2
+LoadModule perl_module libexec/apache24/mod_perl.so
+#
+### // JAMPP ###
+PHP4
+   (service apache24 restart) & spinner $!
 fi
 
 
