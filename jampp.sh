@@ -306,6 +306,9 @@ Alias /phpmyadmin/ "/usr/local/www/phpMyAdmin/"
    # higher security
    #/ Require local
    #/ Require host .example.com
+
+   # lower security
+   Require all granted
 </Directory>
 #
 ### // JAMPP ###
