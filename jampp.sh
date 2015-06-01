@@ -277,11 +277,13 @@ APACHEPHP
    if [ "$CHECKPHPTEST" = "0" ]; then
       echo "" # dummy
       echo "[ERROR] PHP TEST failed"
+      echo "" # dummy
       exit 1
    fi
    if [ "$CHECKPHPTEST" -gt 0 ]; then
       echo "" # dummy
       echo "PHP TEST passed"
+      echo "" # dummy
    fi
    rm -rf /usr/local/www/apache24/data/phptest
 fi
