@@ -577,7 +577,8 @@ esac
 *)
 printf "\033[1;31mWARNING: jampp is experimental and its not ready for production. Do it at your own risk.\033[0m\n"
 echo "" # usage
-echo "usage: $0 { install | start | stop | uninstall }"
+#/ DEV / echo "usage: $0 { install | start | stop | uninstall }"
+echo "usage: $0 { install }"
 ;;
 esac
 exit 0
