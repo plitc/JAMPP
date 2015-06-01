@@ -35,21 +35,7 @@ Dependencies
    ./jampp.sh install
 ```
 
-* free hard disk space requirement: 2-3 GB
-
-JAIL (Package) Dependencies
-=================
-* apache24
-* php56
-* php56-extensions
-* php56-gd
-* mod_php56
-* mysql56-server
-* php56-mysql
-* php56-mysqli
-
-```
-```
+* free hard disk space requirement: 1 GB
 
 Features
 ========
@@ -70,6 +56,20 @@ Features
 * uninstall
 
 usage:
+```
+```
+
+JAIL (Package) Dependencies
+===========================
+* apache24
+* php56
+* php56-extensions
+* php56-gd
+* mod_php56
+* mysql56-server
+* php56-mysql
+* php56-mysqli
+
 ```
 ```
 
@@ -130,4 +130,8 @@ Errata
 TODO
 ====
 * 31.05.2015:
+
+Tested Applications
+===================
+* 01.06.2015: Wordpress
 
