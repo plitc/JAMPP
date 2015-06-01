@@ -163,6 +163,9 @@ cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
 ### // JAMPP ###
 PHP
    cp -f /usr/local/etc/php.ini-production /usr/local/etc/php.ini
+   sed 's/DirectoryIndex index.html/DirectoryIndex index.php index.html/g' /usr/local/etc/apache24/httpd.conf > /usr/local/etc/apache24/httpd.conf_MOD
+   cp -f /usr/local/etc/apache24/httpd.conf_MOD /usr/local/etc/apache24/httpd.conf
+   rm -f /usr/local/etc/apache24/httpd.conf_MOD
 fi
 
 #/ Apache CHECK
@@ -176,7 +179,7 @@ fi
 #/ start Apache
 STARTAPACHE=$(service apache24 status | grep -c "not running")
 if [ "$STARTAPACHE" = "1" ]; then
-   service apache24 start
+   service apache24 restart
 fi
 
 #/ MySQL Server
