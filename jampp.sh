@@ -368,6 +368,9 @@ echo "MySQL Server IPs:        $JAILIPS"
 echo "MySQL Server Username:   root"
 echo "MySQL Server Password:   jampp"
 echo ""
+echo "PHPMyAdmin:              http://[ip]/phpmyadmin"
+echo "Webalizer:               http://[ip]/stats"
+echo ""
 ### ### ### ### ### ### ### ### ###
 #/ cleanup
 ### ### ### ### ### ### ### ### ###
