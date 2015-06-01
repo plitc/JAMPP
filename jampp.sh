@@ -278,7 +278,7 @@ APACHEPHP
       echo "[ERROR] php connection failed"
       exit 1
    fi
-   if [ "$CHECKPHPTEST" -gt = "0" ]; then
+   if [ "$CHECKPHPTEST" -gt 0 ]; then
       echo "PHP TEST passed"
    fi
    rm -f usr/local/www/apache24/data/phptest
