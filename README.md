@@ -36,8 +36,16 @@ Dependencies
 
 * free hard disk space requirement: 2-3 GB
 
-HOST (Package) Dependencies
+JAIL (Package) Dependencies
 =================
+* apache24
+* php56
+* php56-extensions
+* php56-gd
+* mod_php56
+* mysql56-server
+* php56-mysql
+
 ```
 ```
 
