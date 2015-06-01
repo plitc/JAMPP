@@ -282,7 +282,7 @@ APACHEPHP
       echo "" # dummy
       echo "PHP TEST passed"
    fi
-   rm -f usr/local/www/apache24/data/phptest
+   rm -rf usr/local/www/apache24/data/phptest
 fi
 
 ### ### ### ### ### ### ### ### ###
