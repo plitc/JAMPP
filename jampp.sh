@@ -316,6 +316,14 @@ PHP3
    (service apache24 restart) & spinner $!
 fi
 
+#/ Apache Perl
+CHECKPKGMODPERL2=$(pkg info | grep -c "mod_perl2")
+if [ "$CHECKPKGMODPERL2" = "0" ]; then
+   echo "---> PKG: add www/mod_perl2"
+   (pkg install -y www/mod_perl2) & spinner $!
+fi
+
+
 
 
 
