@@ -147,18 +147,21 @@ if [ "$CHECKPHP" = "0" ]; then
    echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
    echo "" >> /usr/local/etc/apache24/httpd.conf
 cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
-<IfModule php5_module>
-   DirectoryIndex index.php index.php5 index.html
-   AddType application/x-httpd-php .php
-   AddType application/x-httpd-php-source .phps
-</IfModule>
+# <IfModule php5_module>
+#    DirectoryIndex index.php index.php5 index.html
+#    AddType application/x-httpd-php .php
+#    AddType application/x-httpd-php-source .phps
+# </IfModule>
 
-<FilesMatch "\.php$">
-   SetHandler application/x-httpd-php
-</FilesMatch>
-<FilesMatch "\.phps$">
-   SetHandler application/x-httpd-php-source
-</FilesMatch>
+# <FilesMatch "\.php$">
+#    SetHandler application/x-httpd-php
+# </FilesMatch>
+# <FilesMatch "\.phps$">
+#    SetHandler application/x-httpd-php-source
+# </FilesMatch>
+
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php-source .phps
 
 ### // JAMPP ###
 PHP
