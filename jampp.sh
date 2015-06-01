@@ -292,7 +292,7 @@ APACHEPHP
 fi
 
 #/ PHPMYADMIN
-CHECKPKGPHPMYADMIN=$(pkg info | grep -c "phpmyadmin")
+CHECKPKGPHPMYADMIN=$(pkg info | grep -c "phpMyAdmin")
 if [ "$CHECKPKGPHPMYADMIN" = "0" ]; then
    echo "---> PKG: add databases/phpmyadmin"
    (pkg install -y databases/phpmyadmin) & spinner $!
