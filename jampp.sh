@@ -142,8 +142,8 @@ if [ "$CHECKPKGPHPGD" = "0" ]; then
 fi
 
 #/ PHP-MYSQLI
-CHECKPKGPHPMYSQLI=$(pkg info | grep -c "php56-mysqli")
-if [ "$CHECKPKGPHPGD" = "0" ]; then
+CHECKPKGPHPMYSQLI=$(pkg info | grep -c "php56-mysqli-")
+if [ "$CHECKPKGPHPMYSQLI" = "0" ]; then
    echo "---> PKG: add databases/php56-mysqli"
    (pkg install -y databases/php56-mysqli) & spinner $!
 fi
@@ -238,7 +238,7 @@ if [ "$CHECKPKGMYSQL" = "0" ]; then
 fi
 
 #/ PHP MySQL Server
-CHECKPKGPHPMYSQL=$(pkg info | grep -c "php56-mysql")
+CHECKPKGPHPMYSQL=$(pkg info | grep -c "php56-mysql-")
 if [ "$CHECKPKGPHPMYSQL" = "0" ]; then
    echo "---> PKG: add databases/php56-mysql"
    (pkg install -y databases/php56-mysql) & spinner $!
