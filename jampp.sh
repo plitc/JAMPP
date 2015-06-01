@@ -275,7 +275,8 @@ cat <<"APACHEPHP"> /usr/local/www/apache24/data/phptest/index.php
 APACHEPHP
    CHECKPHPTEST=$(curl -s http://localhost/phptest/index.php | grep -c "FreeBSD")
    if [ "$CHECKPHPTEST" = "0" ]; then
-      echo "[ERROR] php connection failed"
+      echo "" # dummy
+      echo "[ERROR] PHP TEST failed"
       exit 1
    fi
    if [ "$CHECKPHPTEST" -gt 0 ]; then
@@ -290,6 +291,24 @@ CHECKPKGPHPMYADMIN=$(pkg info | grep -c "phpmyadmin")
 if [ "$CHECKPKGPHPMYADMIN" = "0" ]; then
    echo "---> PKG: add databases/phpmyadmin"
    (pkg install -y databases/phpmyadmin) & spinner $!
+cat <<"PHP3">> /usr/local/etc/apache24/httpd.conf
+### JAMPP // ###
+#
+#/ PHPMyAdmin
+Alias /phpmyadmin/ "/usr/local/www/phpMyAdmin/"
+
+<Directory "/usr/local/www/phpMyAdmin/">
+   Options None
+   AllowOverride Limit
+
+   # higher security
+   #/ Require local
+   #/ Require host .example.com
+</Directory>
+#
+### // JAMPP ###
+PHP3
+   (service apache24 restart) & spinner $!
 fi
 
 
