@@ -151,8 +151,8 @@ if [ "$CHECKPKGMODPHP" = "0" ]; then
 #/ if [ "$CHECKPHP" = "0" ]; then
    echo "" >> /usr/local/etc/apache24/httpd.conf
    echo '### JAMPP // ###' >> /usr/local/etc/apache24/httpd.conf
-   echo "" >> /usr/local/etc/apache24/httpd.conf
-   echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
+#/   echo "" >> /usr/local/etc/apache24/httpd.conf
+#/   echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
    echo "" >> /usr/local/etc/apache24/httpd.conf
 cat <<"PHP1">> /usr/local/etc/apache24/httpd.conf
 # <IfModule php5_module>
@@ -182,6 +182,12 @@ cat <<"PHP1">> /usr/local/etc/apache24/httpd.conf
 # <IfModule mime_module>
 #    AddType application/x-httpd-php-source .phps
 #    AddType application/x-httpd-php        .php
+# </IfModule>
+
+# <IfModule mod_php5.c>  
+#    DirectoryIndex index.php index.php3 index.html  
+#    AddType application/x-httpd-php .php  
+#    AddType application/x-httpd-php-source .phps  
 # </IfModule>
 
 ### // JAMPP ###
