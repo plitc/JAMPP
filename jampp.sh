@@ -285,6 +285,17 @@ APACHEPHP
    rm -rf /usr/local/www/apache24/data/phptest
 fi
 
+#/ PHPMYADMIN
+CHECKPKGPHPMYADMIN=$(pkg info | grep -c "phpmyadmin")
+if [ "$CHECKPKGPHPMYADMIN" = "0" ]; then
+   echo "---> PKG: add databases/phpmyadmin"
+   (pkg install -y databases/phpmyadmin) & spinner $!
+fi
+
+
+
+
+
 ### ### ### ### ### ### ### ### ###
 # INFO
 JAILHOSTNAME=$(hostname -f)
