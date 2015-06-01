@@ -279,6 +279,7 @@ APACHEPHP
       exit 1
    fi
    if [ "$CHECKPHPTEST" -gt 0 ]; then
+      echo "" # dummy
       echo "PHP TEST passed"
    fi
    rm -f usr/local/www/apache24/data/phptest
