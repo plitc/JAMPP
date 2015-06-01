@@ -148,6 +148,13 @@ if [ "$CHECKPKGPHPMYSQLI" = "0" ]; then
    (pkg install -y databases/php56-mysqli) & spinner $!
 fi
 
+#/ PHP READLINE
+CHECKPKGPHPREADLINE=$(pkg info | grep -c "php56-readline")
+if [ "$CHECKPKGPHPREADLINE" = "0" ]; then
+   echo "---> PKG: add devel/php56-readline"
+   (pkg install -y devel/php56-readline) & spinner $!
+fi
+
 #/ PHP Modules
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
