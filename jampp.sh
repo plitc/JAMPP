@@ -207,7 +207,7 @@ PHP2
 fi
 
 #/ Apache CHECK
-service apache24 configtest
+(service apache24 configtest) & spinner $!
 if [ "$?" != "0" ]; then
    echo "" # dummy
    echo "[ERROR] unknown config error"
@@ -217,7 +217,7 @@ fi
 #/ start Apache
 STARTAPACHE=$(service apache24 status | grep -c "not running")
 if [ "$STARTAPACHE" = "1" ]; then
-   service apache24 restart
+   (service apache24 restart) & spinner $!
 fi
 
 #/ MySQL Server
@@ -239,7 +239,7 @@ if [ "$CHECKMYSQL" = "0" ]; then
    #/DEPRECATED echo 'mysql_enable="YES"' >> /etc/rc.conf
    sysrc mysql_enable=YES
    cp -f /usr/local/share/mysql/my-default.cnf /etc/my.cnf
-   service mysql-server start
+   (service mysql-server start) & spinner $!
    #/ rehash
    /bin/csh -c "rehash"
    hash
