@@ -335,6 +335,14 @@ PHP4
    (service apache24 restart) & spinner $!
 fi
 
+#/ Webalizer
+CHECKPKGWEBALIZER=$(pkg info | grep -c "webalizer")
+if [ "$CHECKPKGWEBALIZER" = "0" ]; then
+   echo "---> PKG: add www/webalizer"
+   (pkg install -y www/webalizer) & spinner $!
+fi
+
+
 
 
 
