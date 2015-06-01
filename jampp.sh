@@ -107,7 +107,7 @@ echo "---> PKG: upgrade"
 CHECKPKGAPACHE=$(pkg info | grep -c "apache24")
 if [ "$CHECKPKGAPACHE" = "0" ]; then
    echo "---> PKG: add apache24"
-   (pkg install -y apache24) & spinner $!
+   (pkg install -y www/apache24) & spinner $!
 fi
 CHECKAPACHE=$(grep -c "apache24_enable" /etc/rc.conf)
 if [ "$CHECKAPACHE" = "0" ]; then
@@ -119,12 +119,12 @@ fi
 CHECKPKGPHP=$(pkg info | grep -c "php56")
 if [ "$CHECKPKGPHP" = "0" ]; then
    echo "---> PKG: add php56"
-   (pkg install -y php56) & spinner $!
+   (pkg install -y lang/php56) & spinner $!
 fi
 CHECKPKGPHPEXTENSIONS=$(pkg info | grep -c "php56-extensions")
 if [ "$CHECKPKGPHPEXTENSIONS" = "0" ]; then
    echo "---> PKG: add php56-extensions"
-   (pkg install -y php56-extensions) & spinner $!
+   (pkg install -y lang/php56-extensions) & spinner $!
 fi
 
 #/ PHP-GD
@@ -145,7 +145,7 @@ fi
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
    echo "---> PKG: add mod_php56"
-   (pkg install -y mod_php56) & spinner $!
+   (pkg install -y www/mod_php56) & spinner $!
 #/ fi
 #/ CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.conf)
 #/ if [ "$CHECKPHP" = "0" ]; then
@@ -154,7 +154,7 @@ if [ "$CHECKPKGMODPHP" = "0" ]; then
    echo "" >> /usr/local/etc/apache24/httpd.conf
    echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
    echo "" >> /usr/local/etc/apache24/httpd.conf
-cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
+cat <<"PHP1">> /usr/local/etc/apache24/httpd.conf
 # <IfModule php5_module>
 #    DirectoryIndex index.php index.php5 index.html
 #    AddType application/x-httpd-php .php
@@ -168,15 +168,37 @@ cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
 #    SetHandler application/x-httpd-php-source
 # </FilesMatch>
 
-AddType application/x-httpd-php .php
-AddType application/x-httpd-php-source .phps
+# AddType application/x-httpd-php .php
+# AddType application/x-httpd-php-source .phps
+
+# <IfModule php5_module>
+#    <FilesMatch "\.(php|phps|php5|phtml)$">
+#       SetHandler php5-script
+#    </FilesMatch>
+#    #/ DirectoryIndex index.php
+#    DirectoryIndex index.php index.html index.htm
+# </IfModule>
+
+# <IfModule mime_module>
+#    AddType application/x-httpd-php-source .phps
+#    AddType application/x-httpd-php        .php
+# </IfModule>
 
 ### // JAMPP ###
-PHP
+PHP1
    cp -f /usr/local/etc/php.ini-production /usr/local/etc/php.ini
    sed 's/DirectoryIndex index.html/DirectoryIndex index.php index.html/g' /usr/local/etc/apache24/httpd.conf > /usr/local/etc/apache24/httpd.conf_MOD
    cp -f /usr/local/etc/apache24/httpd.conf_MOD /usr/local/etc/apache24/httpd.conf
    rm -f /usr/local/etc/apache24/httpd.conf_MOD
+cat <<"PHP2"> /usr/local/etc/apache24/modules.d/001_mod_php.conf
+<FilesMatch "\.php$">
+   SetHandler application/x-httpd-php
+</FilesMatch>
+<FilesMatch "\.phps$">
+   SetHandler application/x-httpd-php-source
+</FilesMatch>
+fi
+PHP2
 fi
 
 #/ Apache CHECK
@@ -197,7 +219,7 @@ fi
 CHECKPKGMYSQL=$(pkg info | grep -c "mysql56-server")
 if [ "$CHECKPKGMYSQL" = "0" ]; then
    echo "---> PKG: add mysql56-server"
-   (pkg install -y mysql56-server) & spinner $!
+   (pkg install -y databases/mysql56-server) & spinner $!
 fi
 
 #/ PHP MySQL Server
