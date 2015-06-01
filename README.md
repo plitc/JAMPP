@@ -25,7 +25,7 @@ Dependencies
    kldload accf_data
    kldload accf_http
 ```
-   * Jail (Support)
+* Jail
 ```
    #/ GIT Repository
    pkg update
