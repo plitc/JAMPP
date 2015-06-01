@@ -197,7 +197,6 @@ cat <<"PHP2"> /usr/local/etc/apache24/modules.d/001_mod_php.conf
 <FilesMatch "\.phps$">
    SetHandler application/x-httpd-php-source
 </FilesMatch>
-fi
 PHP2
 fi
 
