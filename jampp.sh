@@ -103,10 +103,17 @@ echo "---> PKG: update"
 echo "---> PKG: upgrade"
    (pkg upgrade -y) & spinner $!
 
+#/ Curl
+CHECKPKGCURL=$(pkg info | grep -c "curl")
+if [ "$CHECKPKGCURL" = "0" ]; then
+   echo "---> PKG: add ftp/curl"
+   (pkg install -y ftp/curl) & spinner $!
+fi
+
 #/ Apache
 CHECKPKGAPACHE=$(pkg info | grep -c "apache24")
 if [ "$CHECKPKGAPACHE" = "0" ]; then
-   echo "---> PKG: add apache24"
+   echo "---> PKG: add www/apache24"
    (pkg install -y www/apache24) & spinner $!
 fi
 CHECKAPACHE=$(grep -c "apache24_enable" /etc/rc.conf)
@@ -118,33 +125,33 @@ fi
 #/ PHP
 CHECKPKGPHP=$(pkg info | grep -c "php56")
 if [ "$CHECKPKGPHP" = "0" ]; then
-   echo "---> PKG: add php56"
+   echo "---> PKG: add lang/php56"
    (pkg install -y lang/php56) & spinner $!
 fi
 CHECKPKGPHPEXTENSIONS=$(pkg info | grep -c "php56-extensions")
 if [ "$CHECKPKGPHPEXTENSIONS" = "0" ]; then
-   echo "---> PKG: add php56-extensions"
+   echo "---> PKG: add lang/php56-extensions"
    (pkg install -y lang/php56-extensions) & spinner $!
 fi
 
 #/ PHP-GD
 CHECKPKGPHPGD=$(pkg info | grep -c "php56-gd")
 if [ "$CHECKPKGPHPGD" = "0" ]; then
-   echo "---> PKG: add php56-gd"
-   (pkg install -y php56-gd) & spinner $!
+   echo "---> PKG: add graphics/php56-gd"
+   (pkg install -y graphics/php56-gd) & spinner $!
 fi
 
 #/ PHP-MYSQLI
 CHECKPKGPHPMYSQLI=$(pkg info | grep -c "php56-mysqli")
 if [ "$CHECKPKGPHPGD" = "0" ]; then
-   echo "---> PKG: add php56-mysqli"
-   (pkg install -y php56-mysqli) & spinner $!
+   echo "---> PKG: add databases/php56-mysqli"
+   (pkg install -y databases/php56-mysqli) & spinner $!
 fi
 
 #/ PHP Modules
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
-   echo "---> PKG: add mod_php56"
+   echo "---> PKG: add www/mod_php56"
    (pkg install -y www/mod_php56) & spinner $!
 #/ fi
 #/ CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.conf)
@@ -223,15 +230,15 @@ fi
 #/ MySQL Server
 CHECKPKGMYSQL=$(pkg info | grep -c "mysql56-server")
 if [ "$CHECKPKGMYSQL" = "0" ]; then
-   echo "---> PKG: add mysql56-server"
+   echo "---> PKG: add databases/mysql56-server"
    (pkg install -y databases/mysql56-server) & spinner $!
 fi
 
 #/ PHP MySQL Server
 CHECKPKGPHPMYSQL=$(pkg info | grep -c "php56-mysql")
 if [ "$CHECKPKGPHPMYSQL" = "0" ]; then
-   echo "---> PKG: add php56-mysql"
-   (pkg install -y php56-mysql) & spinner $!
+   echo "---> PKG: add databases/php56-mysql"
+   (pkg install -y databases/php56-mysql) & spinner $!
 fi
 
 CHECKMYSQL=$(grep -c "mysql_enable" /etc/rc.conf)
