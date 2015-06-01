@@ -136,16 +136,16 @@ fi
 #/ PHP Modules
 CHECKPKGMODPHP=$(pkg info | grep -c "mod_php56")
 if [ "$CHECKPKGMODPHP" = "0" ]; then
-    echo "---> PKG: add mod_php56"
-    (pkg install -y mod_php56) & spinner $!
+   echo "---> PKG: add mod_php56"
+   (pkg install -y mod_php56) & spinner $!
 fi
 CHECKPHP=$(grep -c "libexec/apache24/libphp5.so" /usr/local/etc/apache24/httpd.conf)
 if [ "$CHECKPHP" = "0" ]; then
-    echo "" >> /usr/local/etc/apache24/httpd.conf
-    echo '### JAMPP // ###' >> /usr/local/etc/apache24/httpd.conf
-    echo "" >> /usr/local/etc/apache24/httpd.conf
-    echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
-    echo "" >> /usr/local/etc/apache24/httpd.conf
+   echo "" >> /usr/local/etc/apache24/httpd.conf
+   echo '### JAMPP // ###' >> /usr/local/etc/apache24/httpd.conf
+   echo "" >> /usr/local/etc/apache24/httpd.conf
+   echo 'LoadModule php5_module        libexec/apache24/libphp5.so' >> /usr/local/etc/apache24/httpd.conf
+   echo "" >> /usr/local/etc/apache24/httpd.conf
 cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
 <IfModule php5_module>
    DirectoryIndex index.php index.php5 index.html
@@ -162,10 +162,10 @@ cat <<"PHP">> /usr/local/etc/apache24/httpd.conf
 
 ### // JAMPP ###
 PHP
+   cp -f /usr/local/etc/php.ini-production /usr/local/etc/php.ini
 fi
 
 #/ Apache CHECK
-#// apachectl configtest
 service apache24 configtest
 if [ "$?" != "0" ]; then
    echo "" # dummy
@@ -198,8 +198,19 @@ if [ "$CHECKMYSQL" = "0" ]; then
    echo 'mysql_enable="YES"' >> /etc/rc.conf
    cp -f /usr/local/share/mysql/my-default.cnf /etc/my.cnf
    service mysql-server start
-   rehash
+   #/ rehash
+   hash
    mysqladmin -uroot password 'jampp'
+   sync
+fi
+
+#/ MySQL CHECK
+CHECKMYSQLD=$(service mysql-server status | grep -c "is running")
+if [ "$CHECKMYSQLD" = "1" ]; then
+   : # dummy
+else
+   echo "[ERROR] mysql is not running."
+   exit 1
 fi
 
 ### ### ### ### ### ### ### ### ###
