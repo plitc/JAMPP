@@ -341,11 +341,11 @@ if [ "$CHECKPKGWEBALIZER" = "0" ]; then
    echo "---> PKG: add www/webalizer"
    (pkg install -y www/webalizer) & spinner $!
    mkdir -p /usr/local/www/stats
-   webalizer -o /usr/local/www/stats /var/log/httpd-access_log
+   webalizer -o /usr/local/www/stats /var/log/httpd-access.log
 cat <<"CRONTAB1">> /etc/crontab
 ### JAMPP // ###
 #
-0 * * * * /usr/local/bin/webalizer -o /usr/local/www/stats /var/log/httpd-access_log > /var/log/webalizer-hourly
+0 * * * * /usr/local/bin/webalizer -o /usr/local/www/stats /var/log/httpd-access.log > /var/log/webalizer-hourly
 #
 ### // JAMPP ###
 CRONTAB1
