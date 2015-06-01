@@ -18,14 +18,15 @@ WARNING
 Dependencies
 ============
 * FreeBSD
-   * Jail (Support)
 ```
    #/ Kernel Modules
    echo 'accf_data_load="YES" # Wait for data accept filter' >> /boot/loader.conf
    echo 'accf_http_load="YES" # Wait for full HTTP request accept filter' >> /boot/loader.conf
    kldload accf_data
    kldload accf_http
-
+```
+   * Jail (Support)
+```
    #/ GIT Repository
    pkg update
    pkg install -y git
@@ -89,6 +90,18 @@ Example
 =======
 * install
 ```
+   $ ./jampp.sh install
+
+MySQL Server Name:       jampp
+MySQL Server IPs:
+MySQL Server Username:   root
+MySQL Server Password:   jampp
+
+PHPMyAdmin:              http://[ip]/phpmyadmin
+Webalizer:               http://[ip]/stats
+
+
+jampp installation finished.
 ```
 
 * start
