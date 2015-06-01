@@ -340,6 +340,16 @@ CHECKPKGWEBALIZER=$(pkg info | grep -c "webalizer")
 if [ "$CHECKPKGWEBALIZER" = "0" ]; then
    echo "---> PKG: add www/webalizer"
    (pkg install -y www/webalizer) & spinner $!
+   mkdir -p /usr/local/www/stats
+   webalizer -o /usr/local/www/stats /var/log/httpd-access_log
+cat <<"CRONTAB1">> /etc/crontab
+### JAMPP // ###
+#
+0 * * * * /usr/local/bin/webalizer -o /usr/local/www/stats /var/log/httpd-access_log > /var/log/webalizer-hourly
+#
+### // JAMPP ###
+CRONTAB1
+   (service cron restart) & spinner $!
 fi
 
 
