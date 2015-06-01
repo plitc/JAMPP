@@ -135,5 +135,5 @@ TODO
 Tested Applications
 ===================
 * 01.06.2015: Wordpress
-* 01.06.2015: MediaWiki - ![pkg install www/mediawiki125](http://www.freshports.org/www/mediawiki125/)
+* 01.06.2015: MediaWiki - [pkg install www/mediawiki125] http://www.freshports.org/www/mediawiki125/
 
