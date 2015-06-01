@@ -111,7 +111,8 @@ if [ "$CHECKPKGAPACHE" = "0" ]; then
 fi
 CHECKAPACHE=$(grep -c "apache24_enable" /etc/rc.conf)
 if [ "$CHECKAPACHE" = "0" ]; then
-   echo 'apache24_enable="YES"' >> /etc/rc.conf
+   #/DEPRECATED echo 'apache24_enable="YES"' >> /etc/rc.conf
+   sysrc apache24_enable=YES
 fi
 
 #/ PHP
@@ -201,7 +202,8 @@ fi
 
 CHECKMYSQL=$(grep -c "mysql_enable" /etc/rc.conf)
 if [ "$CHECKMYSQL" = "0" ]; then
-   echo 'mysql_enable="YES"' >> /etc/rc.conf
+   #/DEPRECATED echo 'mysql_enable="YES"' >> /etc/rc.conf
+   sysrc mysql_enable=YES
    cp -f /usr/local/share/mysql/my-default.cnf /etc/my.cnf
    service mysql-server start
    #/ rehash
