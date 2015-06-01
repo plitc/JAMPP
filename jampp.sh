@@ -214,6 +214,16 @@ else
 fi
 
 ### ### ### ### ### ### ### ### ###
+# INFO
+JAILHOSTNAME=$(hostname -f)
+JAILIPS=$(ifconfig | egrep "inet |inet6" | awk '{print $2}' | tr '\n' ' ')
+echo ""
+echo "MySQL Server Name:       $JAILHOSTNAME"
+echo "MySQL Server IPs:        $JAILIPS"
+echo "MySQL Server Username:   root"
+echo "MySQL Server Password:   jampp"
+echo ""
+### ### ### ### ### ### ### ### ###
 #/ cleanup
 ### ### ### ### ### ### ### ### ###
 echo "" # printf
