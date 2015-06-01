@@ -256,6 +256,24 @@ else
    exit 1
 fi
 
+#/ PHP FUNCTION CHECK
+CHECKAPACHEPHP=$(service apache24 status | grep -c "is running")
+if [ "$CHECKAPACHEPHP" = "1" ]; then
+   (service apache24 restart) & spinner $!
+   mkdir -p /usr/local/www/apache24/data/phptest
+cat <<"APACHEPHP"> /usr/local/www/apache24/data/phptest/index.php
+<?php
+    phpinfo();
+?>
+APACHEPHP
+   CHECKPHPTEST=$(curl -s http://localhost/phptest/index.php | grep -c "FreeBSD")
+   if [ "$CHECKPHPTEST" = "0" ]; then
+      echo "[ERROR] php connection failed"
+      exit 1
+   fi
+   rm -f usr/local/www/apache24/data/phptest
+fi
+
 ### ### ### ### ### ### ### ### ###
 # INFO
 JAILHOSTNAME=$(hostname -f)
